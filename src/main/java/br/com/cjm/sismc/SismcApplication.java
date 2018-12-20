@@ -16,6 +16,7 @@ import br.com.cjm.sismc.domain.Cidade;
 import br.com.cjm.sismc.domain.Cliente;
 import br.com.cjm.sismc.domain.Endereco;
 import br.com.cjm.sismc.domain.Estado;
+import br.com.cjm.sismc.domain.ItemPedido;
 import br.com.cjm.sismc.domain.Pagamento;
 import br.com.cjm.sismc.domain.PagamentoComBoleto;
 import br.com.cjm.sismc.domain.PagamentoComCartao;
@@ -28,6 +29,7 @@ import br.com.cjm.sismc.repositories.CidadeRepository;
 import br.com.cjm.sismc.repositories.ClienteRepository;
 import br.com.cjm.sismc.repositories.EnderecoRepository;
 import br.com.cjm.sismc.repositories.EstadoRepository;
+import br.com.cjm.sismc.repositories.ItemPedidoRepository;
 import br.com.cjm.sismc.repositories.PagamentoRepository;
 import br.com.cjm.sismc.repositories.PedidoRepository;
 import br.com.cjm.sismc.repositories.ProdutoRepository;
@@ -58,6 +60,10 @@ public class SismcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SismcApplication.class, args);
@@ -121,6 +127,19 @@ public class SismcApplication implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1,p1,0.00,1,2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1,p3,0.00,2,80.00);
+		ItemPedido ip3 = new ItemPedido(ped2,p2,100.00,1,800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 	}
 
 }
