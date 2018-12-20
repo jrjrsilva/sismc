@@ -33,12 +33,11 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
-	}
-	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod();
-	}
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
+	
+	
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
@@ -56,6 +55,15 @@ public class Cliente implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public TipoCliente getTipo() {
+		return TipoCliente.toEnum(tipo);
+	}
+	public void setTipo(TipoCliente tipo) {
+		this.tipo = tipo.getCod();
+	}
+	
+	
 	public String getNome() {
 		return nome;
 	}
@@ -125,6 +133,12 @@ public class Cliente implements Serializable{
 	}
 	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
+	}
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 	
 	
