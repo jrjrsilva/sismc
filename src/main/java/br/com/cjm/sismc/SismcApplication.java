@@ -12,10 +12,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.cjm.sismc.domain.Categoria;
 import br.com.cjm.sismc.domain.Cidade;
+import br.com.cjm.sismc.domain.Cliente;
+import br.com.cjm.sismc.domain.Endereco;
 import br.com.cjm.sismc.domain.Estado;
 import br.com.cjm.sismc.domain.Produto;
+import br.com.cjm.sismc.domain.enums.TipoCliente;
 import br.com.cjm.sismc.repositories.CategoriaRepository;
 import br.com.cjm.sismc.repositories.CidadeRepository;
+import br.com.cjm.sismc.repositories.ClienteRepository;
+import br.com.cjm.sismc.repositories.EnderecoRepository;
 import br.com.cjm.sismc.repositories.EstadoRepository;
 import br.com.cjm.sismc.repositories.ProdutoRepository;
 
@@ -34,6 +39,12 @@ public class SismcApplication implements CommandLineRunner{
 	@Autowired
 	private CidadeRepository cidadeRepository;
 		
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SismcApplication.class, args);
 	}
@@ -70,6 +81,18 @@ public class SismcApplication implements CommandLineRunner{
 		
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+		
+		Cliente cli1 = new Cliente(null,"Maria jose","mariajose@gmail.com","12345678921",TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("13269856","96328754"));
+		
+		Endereco e1 = new Endereco(null,"Rua flores","300","Apto 303","Jardim","20151968",cli1,c1);
+		Endereco e2 = new Endereco(null,"Av St Louis","390","Apto 215","Centro","26152964",cli1,c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1,e2));
+		
 		
 	}
 
