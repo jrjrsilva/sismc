@@ -2,11 +2,13 @@ package br.com.cjm.sismc.services;
 
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
 import br.com.cjm.sismc.domain.Categoria;
 import br.com.cjm.sismc.repositories.CategoriaRepository;
+import br.com.cjm.sismc.services.exception.DataIntegrityException;
 import br.com.cjm.sismc.services.exception.ObjectNotFoundException;
 
 
@@ -30,6 +32,16 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		this.find(id);
+		
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que tem produtos!");
+		}		
 	}
 	
 
