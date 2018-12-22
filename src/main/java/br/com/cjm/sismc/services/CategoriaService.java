@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.com.cjm.sismc.domain.Categoria;
+import br.com.cjm.sismc.domain.Cliente;
 import br.com.cjm.sismc.dto.CategoriaDTO;
 import br.com.cjm.sismc.repositories.CategoriaRepository;
 import br.com.cjm.sismc.services.exception.DataIntegrityException;
@@ -35,7 +36,8 @@ public class CategoriaService {
 	}
 	
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
+		Categoria newObj = find(obj.getId());
+		updateData(newObj,obj);
 		return repo.save(obj);
 	}
 	
@@ -62,5 +64,8 @@ public class CategoriaService {
 	public Categoria fromDTO(CategoriaDTO objDTO) {
 		return new Categoria(objDTO.getId(),objDTO.getNome());
 	}
-
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+	}
 }
