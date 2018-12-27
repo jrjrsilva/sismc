@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.cjm.sismc</groupId>
-	<artifactId>sismc</artifactId>
+	<artifactId>pedidosmc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sismc</name>
 	<description>Controle</description>
