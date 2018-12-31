@@ -60,7 +60,7 @@ public class PedidoService {
 		}
 		obj = repo.save(obj);
 		pagamentoRepository.save(obj.getPagamento());
-		System.out.println(obj.getItens());
+		
 		for(ItemPedido ip: obj.getItens()) {
 			ip.setDesconto(0.0);
 			Produto p = produtoService.find(ip.getProduto().getId());

@@ -35,7 +35,7 @@ public class ItemPedido implements Serializable{
 	}
 	
 	public Double getSubTotal() {
-		return (preco - desconto)* quantidade;
+		return (preco - desconto) * quantidade;
 	}
 	
 	@JsonIgnore
@@ -106,20 +106,20 @@ public class ItemPedido implements Serializable{
 	}
 	
 	
-/*	@Override
+	@Override
 	public String toString() {
-		//NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
 		StringBuilder builder = new StringBuilder();
 		builder.append(getProduto().getNome());
 		builder.append(", Qte: ");
 		builder.append(getQuantidade());
 		builder.append(", Preço unitário: ");
-		builder.append(getPreco());
+		builder.append(nf.format(getPreco()));
 		builder.append(", Subtotal: ");
-		builder.append(getSubTotal());
+		builder.append(nf.format(getSubTotal()));
 		builder.append("\n");
 		return builder.toString();
-	}*/
+	}
 	
 	
 }
