@@ -1,6 +1,8 @@
 package br.com.cjm.sismc.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -10,9 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class ItemPedido implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore
@@ -22,9 +21,9 @@ public class ItemPedido implements Serializable{
 	private Double desconto;
 	private Integer quantidade;
 	private Double preco;
+	
 	public ItemPedido() {
-		super();
-		// TODO Auto-generated constructor stub
+	
 	}
 	public ItemPedido(Pedido pedido ,Produto produto, Double desconto, Integer quantidade, Double preco) {
 		super();
@@ -39,12 +38,30 @@ public class ItemPedido implements Serializable{
 		return (preco - desconto)* quantidade;
 	}
 	
+	@JsonIgnore
+	public Pedido getPedido() {
+		return id.getPedido();
+	}
+	
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
+	
+	public Produto getProduto() {
+		return id.getProduto();
+	}
+	
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
+	}
+	
 	public ItemPedidoPK getId() {
 		return id;
 	}
 	public void setId(ItemPedidoPK id) {
 		this.id = id;
 	}
+	
 	public Double getDesconto() {
 		return desconto;
 	}
@@ -64,22 +81,6 @@ public class ItemPedido implements Serializable{
 		this.preco = preco;
 	}
 	
-	@JsonIgnore
-	public Pedido getPedido() {
-		return id.getPedido();
-	}
-	
-	public void setPedido(Pedido pedido) {
-		id.setPedido(pedido);
-	}
-	
-	public Produto getProduto() {
-		return id.getProduto();
-	}
-	
-	public void Poduto(Produto produto) {
-		id.setProduto(produto);
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -103,6 +104,22 @@ public class ItemPedido implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
+/*	@Override
+	public String toString() {
+		//NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qte: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço unitário: ");
+		builder.append(getPreco());
+		builder.append(", Subtotal: ");
+		builder.append(getSubTotal());
+		builder.append("\n");
+		return builder.toString();
+	}*/
 	
 	
 }

@@ -8,10 +8,6 @@ import javax.persistence.ManyToOne;
 
 @Embeddable
 public class ItemPedidoPK implements Serializable{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
@@ -21,15 +17,6 @@ public class ItemPedidoPK implements Serializable{
 	@JoinColumn(name="produto_id")
 	private Produto produto;
 	
-	public ItemPedidoPK() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public ItemPedidoPK(Pedido pedido, Produto produto) {
-		super();
-		this.pedido = pedido;
-		this.produto = produto;
-	}
 	public Pedido getPedido() {
 		return pedido;
 	}
@@ -42,6 +29,7 @@ public class ItemPedidoPK implements Serializable{
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+		
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,8 +59,4 @@ public class ItemPedidoPK implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
 }

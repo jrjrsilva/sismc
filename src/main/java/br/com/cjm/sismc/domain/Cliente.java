@@ -56,15 +56,7 @@ public class Cliente implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public TipoCliente getTipo() {
-		return TipoCliente.toEnum(tipo);
-	}
-	public void setTipo(TipoCliente tipo) {
-		this.tipo = tipo.getCod();
-	}
-	
-	
+		
 	public String getNome() {
 		return nome;
 	}
@@ -132,14 +124,20 @@ public class Cliente implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
+
 	public List<Pedido> getPedidos() {
 		return pedidos;
 	}
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+	
+	
+	public TipoCliente getTipo() {
+		return TipoCliente.toEnum(tipo);
+	}
+	public void setTipo(TipoCliente tipo) {
+		this.tipo = tipo.getCod();
 	}
 	
 	

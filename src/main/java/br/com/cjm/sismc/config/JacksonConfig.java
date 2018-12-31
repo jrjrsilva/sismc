@@ -1,6 +1,7 @@
 package br.com.cjm.sismc.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.cjm.sismc.domain.PagamentoComBoleto;
 import br.com.cjm.sismc.domain.PagamentoComCartao;
 
+@Configuration
 public class JacksonConfig {
 
 	// https://stackoverflow.com/questions/41452598/overcome-can-not-construct-instance-ofinterfaceclass-
