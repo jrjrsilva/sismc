@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.cjm.sismc.domain.Cidade;
 import br.com.cjm.sismc.domain.Cliente;
 import br.com.cjm.sismc.domain.Endereco;
+import br.com.cjm.sismc.domain.enums.Perfil;
 import br.com.cjm.sismc.domain.enums.TipoCliente;
 import br.com.cjm.sismc.dto.ClienteDTO;
 import br.com.cjm.sismc.dto.ClienteNewDTO;
 import br.com.cjm.sismc.repositories.ClienteRepository;
 import br.com.cjm.sismc.repositories.EnderecoRepository;
+import br.com.cjm.sismc.security.UserSS;
+import br.com.cjm.sismc.services.exception.AuthorizationException;
 import br.com.cjm.sismc.services.exception.DataIntegrityException;
 import br.com.cjm.sismc.services.exception.ObjectNotFoundException;
 
@@ -36,7 +39,12 @@ public class ClienteService {
 	@Autowired
 	private BCryptPasswordEncoder pe;
 	
+	
 	public Cliente find(Integer id) {
+		UserSS user = UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado!");
+		}
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
